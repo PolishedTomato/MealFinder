@@ -10,23 +10,25 @@ import SwiftUI
 struct ContentView: View {
     @State var categories : [Category]? = nil
     
-    func fetchCategory()async{
+    func fetchCategory()async ->[Category]? {
         guard let url = URL(string: "https://www.themealdb.com/api/json/v1/1/categories.php") else{
             print("url failed")
-            return
+            return nil
         }
         
         guard let (response, _) = try? await URLSession.shared.data(from: url)else {
             print("api failed")
-            return
+            return nil
         }
         
         do{
-            categories = try JSONDecoder().decode([String: [Category]].self, from: response)["categories"]!
+            let res = try JSONDecoder().decode([String: [Category]].self, from: response)["categories"]!
             print("decode success")
+            return res
         }
         catch{
             print("decode failed")
+            return nil
         }
     }
     
@@ -65,7 +67,7 @@ struct ContentView: View {
             }
         }
         .task{
-            await fetchCategory()
+            await categories = fetchCategory()
         }
     }
 }

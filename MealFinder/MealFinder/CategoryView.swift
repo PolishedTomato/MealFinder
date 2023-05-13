@@ -17,7 +17,7 @@ struct CategoryView: View {
             
             ScrollView{
                 VStack{
-                    ForEach(viewModel.filterMeals, id:\.self){ meal in
+                    ForEach(viewModel.sortedMeals, id:\.self){ meal in
                 
                         MealView(meal: meal)
                             .padding(.bottom, 30)
@@ -33,7 +33,7 @@ struct CategoryView: View {
             .padding()
             .navigationTitle(self.category)
             .task{
-                await viewModel.fetchMeals(category: self.category)
+                await viewModel.meals = viewModel.fetchMeals(category: self.category)
             }
             .searchable(text: $viewModel.searchText)
             
