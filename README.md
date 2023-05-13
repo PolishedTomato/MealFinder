@@ -1,7 +1,7 @@
 # MealFinder
 
 # Goal
-* This app provides tons of recipe for user to learn. Recipe categories include seafood, breakfast, lamb, chicken, and more! 
+* This app provides tons of recipes for users to learn. Recipe categories include seafood, breakfast, lamb, chicken, and more! 
 
 # Featrue
 * Recipe look up by food category.
