@@ -8,14 +8,6 @@
 import XCTest
 
 final class MealFinderTests: XCTestCase {
-    
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
 
     //test the api response and decoding of fetching data about food category
     func test_fetchCategory()async {
@@ -48,7 +40,7 @@ final class MealFinderTests: XCTestCase {
         for category in category_name{
             let meals = await CategoryView.ViewModel().fetchMeals(category: category)
             for meal in meals{
-                let mealDetail: MealDetail? = await MealDetailView(mealID: meal.id).viewModel.fetchMealDetail(mealID: meal.id)
+                let mealDetail: MealDetail? = await MealDetailView.ViewModel().fetchMealDetail(mealID: meal.id)
                 
                 XCTAssertNotNil(mealDetail)
             }
