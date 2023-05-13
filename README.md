@@ -11,7 +11,7 @@
 # Technologies
 * Swift
 * SwiftUI
-* the mealdb api
+* TheMealDB APIs
 * Unit Test
 * Json prasing
 
