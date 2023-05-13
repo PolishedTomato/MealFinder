@@ -13,7 +13,7 @@
 * SwiftUI
 * the mealdb api
 * Unit Test
-* Json serialization
+* Json prasing
 
 # Credit
 * Deye Lei
