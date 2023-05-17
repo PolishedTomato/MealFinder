@@ -25,14 +25,177 @@ struct Meal: Codable, Identifiable, Hashable{
 }
 
 struct MealDetail: Codable{
+    enum CodingKeys: CodingKey{
+        case idMeal, strMeal, strDrinkAlternate, strCategory, strArea, strInstructions, strMealThumb, strTags, strYoutube, strIngredient1, strIngredient2, strIngredient3, strIngredient4,strIngredient5,strIngredient6,strIngredient7,strIngredient8,strIngredient9,strIngredient10,strIngredient11,strIngredient12,strIngredient13,strIngredient14,strIngredient15,strIngredient16,strIngredient17,strIngredient18,strIngredient19,strIngredient20,strMeasure1,
+             strMeasure2,strMeasure3,strMeasure4,strMeasure5,strMeasure6,strMeasure7,strMeasure8,strMeasure9,strMeasure10,strMeasure11,strMeasure12,strMeasure13,strMeasure14,strMeasure15,strMeasure16,strMeasure17,strMeasure18,strMeasure19,strMeasure20
+    }
     
-    var idMeal: String?
-    var strMeal: String?
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.idMeal = try container.decode(String.self, forKey: CodingKeys.idMeal)
+        self.strMeal = try container.decode(String.self, forKey: .strMeal)
+        self.strDrinkAlternate = try container.decode(String?.self, forKey: .strDrinkAlternate)
+        self.strCategory = try container.decode(String.self, forKey: .strCategory)
+        self.strArea = try container.decode(String.self, forKey: .strArea)
+        self.strInstructions = try container.decode(String.self, forKey: .strInstructions)
+        self.strMealThumb = try container.decode(String.self, forKey: .strMealThumb)
+        self.strTags = try container.decode(String?.self, forKey: .strTags)
+        self.strYoutube = try container.decode(String?.self, forKey: .strYoutube)
+        
+        var ingredent:String? = ""
+        var measure:String? = ""
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient1)
+        measure = try container.decode(String?.self, forKey: .strMeasure1)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient2)
+        measure = try container.decode(String?.self, forKey: .strMeasure2)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient3)
+        measure = try container.decode(String?.self, forKey: .strMeasure3)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient4)
+        measure = try container.decode(String?.self, forKey: .strMeasure4)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient5)
+        measure = try container.decode(String?.self, forKey: .strMeasure5)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient6)
+        measure = try container.decode(String?.self, forKey: .strMeasure6)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient7)
+        measure = try container.decode(String?.self, forKey: .strMeasure7)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient8)
+        measure = try container.decode(String?.self, forKey: .strMeasure8)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient9)
+        measure = try container.decode(String?.self, forKey: .strMeasure9)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient10)
+        measure = try container.decode(String?.self, forKey: .strMeasure10)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient11)
+        measure = try container.decode(String?.self, forKey: .strMeasure11)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient12)
+        measure = try container.decode(String?.self, forKey: .strMeasure12)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient13)
+        measure = try container.decode(String?.self, forKey: .strMeasure13)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient14)
+        measure = try container.decode(String?.self, forKey: .strMeasure14)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient15)
+        measure = try container.decode(String?.self, forKey: .strMeasure15)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient16)
+        measure = try container.decode(String?.self, forKey: .strMeasure16)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient17)
+        measure = try container.decode(String?.self, forKey: .strMeasure17)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient18)
+        measure = try container.decode(String?.self, forKey: .strMeasure18)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient19)
+        measure = try container.decode(String?.self, forKey: .strMeasure19)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+        ingredent = try container.decode(String?.self, forKey: .strIngredient20)
+        measure = try container.decode(String?.self, forKey: .strMeasure20)
+        
+        if let i = ingredent, let m = measure, i != "" && m != ""{
+            material.append(i+": "+m)
+        }
+        
+    }
+    
+    var material: [String] = []
+    
+    var idMeal: String
+    var strMeal: String
     var strDrinkAlternate: String?
-    var strCategory: String?
-    var strArea: String?
-    var strInstructions:String?
-    var strMealThumb: String?
+    var strCategory: String
+    var strArea: String
+    var strInstructions:String
+    var strMealThumb: String
     var strTags: String?
     var strYoutube: String?
     
@@ -80,12 +243,3 @@ struct MealDetail: Codable{
 
 }
 
-extension MealDetail{
-    static let example1 = MealDetail(idMeal: "53050", strMeal: "example meal1", strDrinkAlternate: nil, strCategory: nil, strArea: nil, strInstructions: nil, strMealThumb: nil, strTags: nil, strYoutube: nil, strIngredient1: "Sesame", strIngredient2: "Breed", strIngredient3: "Coke", strIngredient4: "Candy", strIngredient5: "Milk", strIngredient6: nil, strIngredient7: nil, strIngredient8: nil, strIngredient9: nil, strIngredient10: nil, strIngredient11: nil, strIngredient12: nil, strIngredient13: nil, strIngredient14: nil, strIngredient15: nil, strIngredient16: nil, strIngredient17: nil, strIngredient18: nil, strIngredient19: nil, strIngredient20: nil, strMeasure1: "2 cups", strMeasure2: "1", strMeasure3: "2 bottles", strMeasure4: "7 pieces", strMeasure5: "1 bottle", strMeasure6: nil, strMeasure7: nil, strMeasure8: nil, strMeasure9: nil, strMeasure10: nil, strMeasure11: nil, strMeasure12: nil, strMeasure13: nil, strMeasure14: nil, strMeasure15: nil, strMeasure16: nil, strMeasure17: nil, strMeasure18: nil, strMeasure19: nil, strMeasure20: nil)
-    
-    static let example2 = MealDetail(idMeal: "53050", strMeal: "example meal2", strDrinkAlternate: nil, strCategory: nil, strArea: nil, strInstructions: nil, strMealThumb: nil, strTags: nil, strYoutube: nil, strIngredient1: "Chicken Breast", strIngredient2: "Sake", strIngredient3: "Sprite", strIngredient4: "Big Mac", strIngredient5: "Apple Juice", strIngredient6: nil, strIngredient7: nil, strIngredient8: nil, strIngredient9: nil, strIngredient10: nil, strIngredient11: nil, strIngredient12: nil, strIngredient13: nil, strIngredient14: nil, strIngredient15: nil, strIngredient16: nil, strIngredient17: nil, strIngredient18: nil, strIngredient19: nil, strIngredient20: nil, strMeasure1: "2 Grams", strMeasure2: "5 L", strMeasure3: "10 bottles!", strMeasure4: "3", strMeasure5: "4 bottles", strMeasure6: nil, strMeasure7: nil, strMeasure8: nil, strMeasure9: nil, strMeasure10: nil, strMeasure11: nil, strMeasure12: nil, strMeasure13: nil, strMeasure14: nil, strMeasure15: nil, strMeasure16: nil, strMeasure17: nil, strMeasure18: nil, strMeasure19: nil, strMeasure20: nil)
-    
-    static let example3 = MealDetail(idMeal: "53050", strMeal: "example meal3", strDrinkAlternate: nil, strCategory: nil, strArea: nil, strInstructions: nil, strMealThumb: nil, strTags: nil, strYoutube: nil, strIngredient1: "Sesame", strIngredient2: "Breed", strIngredient3: nil, strIngredient4: nil, strIngredient5: "Milk", strIngredient6: nil, strIngredient7: nil, strIngredient8: nil, strIngredient9: "Coke", strIngredient10: "Candy", strIngredient11: nil, strIngredient12: nil, strIngredient13: nil, strIngredient14: nil, strIngredient15: nil, strIngredient16: nil, strIngredient17: nil, strIngredient18: nil, strIngredient19: nil, strIngredient20: nil, strMeasure1: "2 cups", strMeasure2: "1", strMeasure3: nil, strMeasure4: "7 pieces", strMeasure5: nil, strMeasure6: nil, strMeasure7: nil, strMeasure8: nil, strMeasure9: "2 bottles", strMeasure10: "7 pieces", strMeasure11: nil, strMeasure12: nil, strMeasure13: nil, strMeasure14: nil, strMeasure15: nil, strMeasure16: nil, strMeasure17: nil, strMeasure18: nil, strMeasure19: nil, strMeasure20: nil)
-    
-    
-}

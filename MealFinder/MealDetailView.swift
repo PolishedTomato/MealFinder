@@ -29,7 +29,7 @@ struct MealDetailView: View {
                                 .cornerRadius(16)
                         
                         }
-                        Text(viewModel.mealDetail!.strMeal ?? "N/A")
+                        Text(viewModel.mealDetail!.strMeal )
                             .font(.title.bold())
                         
                         Text("Things you need")
@@ -38,7 +38,7 @@ struct MealDetailView: View {
                         Rectangle()
                             .frame(height: 1)
                         
-                        ForEach(viewModel.ingredients, id:\.self) { material in
+                        ForEach(viewModel.mealDetail!.material, id:\.self) { material in
                             Text(material)
                         }
                         
@@ -47,7 +47,7 @@ struct MealDetailView: View {
                             .padding(.top)
                         Rectangle()
                             .frame(height:1)
-                        Text(viewModel.mealDetail!.strInstructions ?? "Instruction not provided")
+                        Text(viewModel.mealDetail!.strInstructions)
                         
                     }
                     .padding()
@@ -55,7 +55,6 @@ struct MealDetailView: View {
             }
             .task{
                 await viewModel.mealDetail = viewModel.fetchMealDetail(mealID: mealID)
-                viewModel.ingredients = viewModel.getIngredients(mealDetail: viewModel.mealDetail)
             }
             .toolbar {
                 Button("cancel", role: .cancel){
@@ -68,6 +67,6 @@ struct MealDetailView: View {
 
 struct MealDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MealDetailView(mealID: "52773")
+        MealDetailView(mealID: "52893")
     }
 }

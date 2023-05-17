@@ -8,39 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var categories : [Category]? = nil
-    
-    func fetchCategory()async ->[Category]? {
-        guard let url = URL(string: "https://www.themealdb.com/api/json/v1/1/categories.php") else{
-            print("url failed")
-            return nil
-        }
-        
-        guard let (response, _) = try? await URLSession.shared.data(from: url)else {
-            print("api failed")
-            return nil
-        }
-        
-        do{
-            let res = try JSONDecoder().decode([String: [Category]].self, from: response)["categories"]!
-            print("decode success")
-            return res
-        }
-        catch{
-            print("decode failed")
-            return nil
-        }
-    }
+    @StateObject var viewModel = ViewModel()
     
     var body: some View {
         NavigationView{
-            if categories == nil{
+            if viewModel.categories == nil{
                 ProgressView()
             }
             else{
                 ScrollView{
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 160))]) {
-                        ForEach(categories!,id: \.self) { category in
+                        ForEach(viewModel.categories!,id: \.self) { category in
                             NavigationLink {
                                 CategoryView(category: category.strCategory)
                             } label: {
@@ -67,7 +45,7 @@ struct ContentView: View {
             }
         }
         .task{
-            await categories = fetchCategory()
+            await viewModel.categories = viewModel.fetchCategory()
         }
     }
 }

@@ -11,15 +11,15 @@ final class MealFinderTests: XCTestCase {
 
     //test the api response and decoding of fetching data about food category
     func test_fetchCategory()async {
-        let res = await ContentView().fetchCategory()
+        let res:[Category]? = await ContentView.ViewModel().fetchCategory()
         XCTAssertNotNil(res)
         //something is returned
-        XCTAssertNotEqual(res, [])
+        XCTAssertNotEqual(res!, [])
     }
     
     //test fetchMeal function for all meal category
     func test_fetchMeal()async {
-        let allCategories = await ContentView().fetchCategory()
+        let allCategories = await ContentView.ViewModel().fetchCategory()
         let category_name = allCategories!.map{
             $0.strCategory
         }
@@ -32,7 +32,7 @@ final class MealFinderTests: XCTestCase {
     
     //test fetchMealDetail function in MealDetailView
     func test_fetchMealDetail() async{
-        let allCategories = await ContentView().fetchCategory()
+        let allCategories = await ContentView.ViewModel().fetchCategory()
         let category_name = allCategories!.map{
             $0.strCategory
         }
@@ -43,24 +43,42 @@ final class MealFinderTests: XCTestCase {
                 let mealDetail: MealDetail? = await MealDetailView.ViewModel().fetchMealDetail(mealID: meal.id)
                 
                 XCTAssertNotNil(mealDetail)
+                XCTAssertNotNil(mealDetail?.idMeal)
+                XCTAssertNotNil(mealDetail?.strMeal)
+                //XCTAssertNotNil(mealDetail?.strDrinkAlternate)
+                XCTAssertNotNil(mealDetail?.strCategory)
+                XCTAssertNotNil(mealDetail?.strInstructions)
+                XCTAssertNotNil(mealDetail?.strMealThumb)
+                //XCTAssertNotNil(mealDetail?.strTags)
+                //XCTAssertNotNil(mealDetail?.strYoutube)
             }
         }
     }
-    
+    //"52827", "52885","52949"
     //test getIngredient method in MealDetail.viewModel
-    @MainActor func test_ingredientExtraction(){
-        let test_case1 = MealDetail.example1
-        let test_case2 = MealDetail.example2
-        let test_case3 = MealDetail.example3
+    func test_ingredientExtraction() async{
+        var IDs = ["52893", "52806", "52827"]
+        var answers = [["Plain Flour: 120g", "Caster Sugar: 60g", "Butter: 60g", "Braeburn Apples: 300g", "Butter: 30g", "Demerara Sugar: 30g", "Blackberrys: 120g", "Cinnamon: \u{00bc} teaspoon", "Ice Cream: to serve" ],
+                       ["lemons: 2 Juice", "paprika: 4 tsp", "red onions: 2 finely chopped", "chicken thighs: 16 skinnless", "vegetable oil: For brushing", "Greek yogurt: 300ml ", "ginger: large piece", "garlic clove: 4", "garam masala: \u{00be} tsp", "ground cumin: \u{00be} tsp", "chilli powder: \u{00bd} tsp", "turmeric: \u{00bc} tsp"],
+                       ["Peanuts: 85g",
+                        "Coconut cream: 400ml can",
+                        "Massaman curry paste: 4 tbsp",
+                        "Beef: 600g stewing cut into strips",
+                        "Potatoes: 450g waxy",
+                        "Onion: 1 cut thin wedges",
+                        "Lime: 4 leaves",
+                        "Cinnamon stick: 1",
+                        "Tamarind paste: 1 tbsp",
+                        "Brown sugar: 1 tbsp palm or soft light",
+                        "Fish Sauce: 1 tbsp",
+                        "chilli: 1 red deseeded and finely sliced, to serve",
+                        "Jasmine Rice: to serve"]
+        ]
+
+        for i in IDs.indices{
+            let res = await MealDetailView.ViewModel().fetchMealDetail(mealID: IDs[i])
+            XCTAssertEqual(res!.material, answers[i])
+        }
         
-        let ans1 = ["Sesame: 2 cups", "Breed: 1", "Coke: 2 bottles", "Candy: 7 pieces", "Milk: 1 bottle"]
-        let ans2 = ["Chicken Breast: 2 Grams", "Sake: 5 L", "Sprite: 10 bottles!", "Big Mac: 3", "Apple Juice: 4 bottles"]
-        let ans3 = ["Sesame: 2 cups", "Breed: 1", "Coke: 2 bottles", "Candy: 7 pieces"]
-        
-        XCTAssertEqual(ans1, MealDetailView.ViewModel().getIngredients(mealDetail: test_case1))
-        
-        XCTAssertEqual(ans2, MealDetailView.ViewModel().getIngredients(mealDetail: test_case2))
-        
-        XCTAssertEqual(ans3, MealDetailView.ViewModel().getIngredients(mealDetail: test_case3))
     }
 }

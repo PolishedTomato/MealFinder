@@ -16,8 +16,10 @@ extension CategoryView{
         @Published var meals: [Meal] = []
         @Published var searchText = ""
         @Published var selectedMeal : Meal? = nil
+        @Published var category = ""
         
         func fetchMeals(category: String)async->[Meal]{
+            self.category = category
             let mealUrl = "https://themealdb.com/api/json/v1/1/filter.php?c=\(category)"
             guard let url = URL(string: mealUrl) else{
                 print("invaild url")
@@ -31,11 +33,11 @@ extension CategoryView{
             
             do{
                 let res = try JSONDecoder().decode([String: [Meal]].self, from: response)["meals"]!
-                print("decode success")
+                print("CategoryView decode success category: \(category)")
                 return res
             }
             catch{
-                print("decode failed")
+                print("CategoryView decode failed category: \(category)")
                 return []
             }
         }
